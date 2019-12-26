@@ -1,50 +1,41 @@
+import java.sql.SQLOutput;
+import java.util.stream.IntStream;
+
 public class Main {
 
     public static String printTextPerRole(String[] roles, String[] textLines) {
 
-        String[] allRoles = roles;
-        String[] allText = textLines;
-        //String scripti = new String();
+
         String scriptAll = new String();
         String heroStart = new String();
-        String heroNext = new String();
-        StringBuilder ri = new StringBuilder();
-        final String sp = System.getProperty("line.separator");
-            //ri = (allText[0]);
-        ri = new StringBuilder(roles[1]);
-        //script = ri.substring(3, 9);
 
-        // ri = ri.substring(int 0, int 5);
-
-        //System.out.print(scripti);
         for (int i = 0; i < textLines.length; i++) {
-            //scripti = textLines[i];
-            if (textLines[i]!="0") heroStart = textLines[i].substring(0,textLines[i].indexOf(":")+1);
-            scriptAll = heroStart + sp;
-            scriptAll = scriptAll + (i+1)+") "+textLines[i].substring(textLines[i].indexOf(":")+1)+sp;
-            textLines[i]="0";
-
-            for (int j=(i+1);j < textLines.length; j++ )
-            {
-                if (  heroStart. equals   (heroNext = textLines[j].substring(0,textLines[j].indexOf(":")+1)))
-                {scriptAll = scriptAll + (j+1)+") "+textLines[j].substring(textLines[j].indexOf(":")+1)+sp;
-                    textLines[j]="0";
+            //берем первую не нудевую строку вырезаем и запоминаме имя персонажа
+            if (textLines[i] == "0") continue;
+            heroStart = textLines[i].substring(0, textLines[i].indexOf(":") + 1);
+            scriptAll = heroStart + "\n";
+            //сравниваем имя пресонажа в ячейке сценария с именем heroStart найденные строки записваем в scriptAll , стираем запись в ячейке сценария, чтобы не повторят текст.
+            for (int j = 0; j < textLines.length; j++) {
+                if (heroStart.equals(textLines[j].substring(0, textLines[j].indexOf(":") + 1))) {
+                    scriptAll = scriptAll + (j + 1) + ") " + textLines[j].substring(textLines[j].indexOf(":") + 1) + "\n";
+                    textLines[j] = "0";
                 }
-
-
             }
 
+            // найти отработанную роль в массиве ролей и записать в ячейку ноль
+            for (int j = 0; j < roles.length; j++) {
+                if (heroStart.equals(roles[j] + ":")) roles[j] = "0";
+            }
 
             System.out.print(scriptAll);
             System.out.println("***************************");
 
-
-
-            //ri = allText[i];
-            //System.out.print(i+sp);
-            //System.out.print(scriptAll);
-
-
+        }
+        //пробежаться по списку ролей и найти роли бз текста.
+        for (int j = 0; j < roles.length; j++) {
+            if (roles[j] == "0") continue;
+            System.out.print(roles[j] + ":" + "\n");
+            System.out.println("***************************");
         }
 
 
