@@ -6,29 +6,27 @@ public class Main {
 
     public static String printTextPerRole(String[] roles, String[] textLines) {
 
-        StringBuilder SR = new StringBuilder();
+        StringBuilder sR = new StringBuilder();
 
-        for (int i = 0; i < textLines.length; i++) {
-            SR.append(roles[i]);
-            SR.append(":");
-            SR.append("\n");
+        for (int i = 0; i < roles.length; i++) {
+            sR.append(roles[i]);
+            sR.append(":");
+            sR.append("\n");
 
             for (int j = 0; j < textLines.length; j++) {
 
                 if (textLines[j].startsWith(roles[i].concat(":"))) {
-                    SR.append(j + 1);
-                    SR.append(") ");
+                    sR.append(j + 1);
+                    sR.append(")");
                     textLines[j] = textLines[j].substring(textLines[j].indexOf(":") + 1);
-                    SR.append(textLines[j]);
-                    SR.append("\n");
+                    sR.append(textLines[j]);
+                    sR.append("\n");
                     textLines[j] = "0";
                 }
             }
-            SR.append("\n");
+            sR.append("\n");
         }
-        System.out.println(SR);
-
-        return "";
+        return sR.toString();
     }
 
 
@@ -49,8 +47,7 @@ public class Main {
                         "если выздоровеет, то и так выздоровеет. Да и Христиану Ивановичу затруднительно было б с ними изъясняться: он по-русски ни слова не знает."};
 
 
-        printTextPerRole(roles, textLines);
-        //System.out.println();
+        System.out.println(printTextPerRole(roles, textLines));
 
 
     }
